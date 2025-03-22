@@ -1,0 +1,11 @@
+model ProductVariant {
+  id                      Int   @id @unique @default(autoincrement())
+  name                    String
+  price                   Float
+  quantity                Int
+  shopifyProductVariantId String   @unique
+  productId               Int
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  product                 Product  @relation(fields: [productId], references: [id])
+}

@@ -1,0 +1,69 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .extention-banner {
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    text-align: center;
+    display: none;
+    padding: 10px;
+    flex-direction: column;
+  }
+  .banner-item {
+    margin: 5px 0;
+    background-color: black;
+    width: 100%;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const path = window.location.pathname;
+    let option = null;
+    if (path === '/') {
+      option = 'Home Page';
+    } else if (path.startsWith('/products')) {
+      option = 'Product Page';
+    }
+    fetch('https://mariah-medication-work-classification.trycloudflare.com/api/app/extension?shop=' + Shopify.shop)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('API Responseas:', data);
+        if (data.success) {
+          const settings = data.settings;
+          const bannerContainer = document.getElementById('banner-id');
+          let hasBanners = false;
+          settings.forEach((setting) => {
+            if (setting.pageOption.title === 'All Pages' || setting.pageOption.title === option) {
+              const bannerItem = document.createElement('div');
+              bannerItem.classList.add('banner-item');
+              bannerItem.textContent = setting.text;
+              bannerContainer.appendChild(bannerItem);
+              hasBanners = true;
+            }
+          });
+          if (hasBanners) {
+            bannerContainer.style.display = 'flex';
+          }
+        }
+      })
+      .catch((error) => console.error('Error fetching API:', error));
+  });
+</script>
+<div id="banner-id" class="extention-banner"></div>
+
+{% schema %}
+{
+  "name": "remix-boiler-plate",
+  "target": "head"
+}
+{% endschema %}

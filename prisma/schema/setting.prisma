@@ -1,0 +1,10 @@
+model Setting {
+  id           Int        @id @unique @default(autoincrement())
+  text         String
+  pageOptionId Int
+  sessionId    Int
+  session      Session    @relation(fields: [sessionId], references: [session_id])
+  pageOption   PageOption @relation(fields: [pageOptionId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}

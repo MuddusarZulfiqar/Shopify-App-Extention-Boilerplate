@@ -1,0 +1,14 @@
+model Product {
+  id               Int           @id @unique @default(autoincrement())
+  name             String
+  type             String
+  tags             String
+  description      String
+  shopifyProductId String           @unique
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  sessionId        Int
+  session          Session          @relation(fields: [sessionId], references: [session_id])
+  productVariants  ProductVariant[]
+  productImages    ProductImage[]
+}

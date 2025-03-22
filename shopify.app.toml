@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "776dd15bbcf807b6f829ff2ca027259c"
+application_url = "https://mariah-medication-work-classification.trycloudflare.com"
+embedded = true
+name = "remix-boiler-plate"
+handle = "remix-boiler-plate-4"
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2025-01"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://mariah-medication-work-classification.trycloudflare.com/auth/callback",
+  "https://mariah-medication-work-classification.trycloudflare.com/auth/shopify/callback",
+  "https://mariah-medication-work-classification.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false

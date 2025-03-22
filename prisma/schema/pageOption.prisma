@@ -1,0 +1,5 @@
+model PageOption {
+  id       Int    @id @unique @default(autoincrement())
+  title    String
+  settings Setting[]
+}
